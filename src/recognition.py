@@ -6,6 +6,7 @@ import numpy as np
 import math
 from keras.models import load_model
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 age_dir = 'model/agegender.h5'
 emotion_dir = 'model/emotion.h5'
 emotion_model = load_model(emotion_dir)
