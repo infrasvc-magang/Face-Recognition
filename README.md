@@ -35,4 +35,4 @@ Tahap menjalankan kodingan:
 
 6. Run main.py
 
-`python 'src\main.py`
+`python 'src\main.py'`
