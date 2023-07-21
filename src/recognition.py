@@ -7,6 +7,7 @@ import math
 from keras.models import load_model
 
 frame_skip = 5
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 age_dir = 'model/agegender.h5'
 emotion_dir = 'model/emotion.h5'
 emotion_model = load_model(emotion_dir)
@@ -131,7 +132,7 @@ class FaceRecognition:
                               (right + 10, bottom + 10), (0, 0, 255), 2)
                 cv2.putText(frame, name, (left + 6, top - 15),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (36, 255, 12), 1)
-                cv2.putText(frame, "Emosi: {}".format(emo_prediction), (right + 15, top + 20),
+                cv2.putText(frame, "Emosi: {}".format(emotion_dict[maxindex]), (right + 15, top + 20),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (36, 255, 12), 1)
                 cv2.putText(frame, "Gender: {}".format(get_gender(age_prediction[1])), (right + 15, top + 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (36, 255, 12), 1)

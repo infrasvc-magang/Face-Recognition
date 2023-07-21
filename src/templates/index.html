@@ -1,0 +1,49 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Recognition Web</title>
+</head>
+<body>
+    <h1>Face Recognition Web</h1>
+    <form id="faceRecognitionForm">
+        <!-- Add input elements to get the required data -->
+        <input type="file" id="imageInput" accept="image/*">
+        <input type="button" value="Recognize Face" onclick="recognizeFace()">
+    </form>
+    <div id="resultContainer"></div>
+
+    <script>
+        function recognizeFace() {
+            // Get the image file from the input element
+            const imageInput = document.getElementById('imageInput');
+            const imageFile = imageInput.files[0];
+            
+            // Create a FormData object to send the image data to the backend
+            const formData = new FormData();
+            formData.append('image_data', imageFile);
+
+            // Send the image data to the backend using AJAX
+            fetch('/face_recognition', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Process the response data and display the result
+                const resultContainer = document.getElementById('resultContainer');
+                resultContainer.innerHTML = '';
+                const recognizedNames = data.result;
+                recognizedNames.forEach(name => {
+                    const nameElement = document.createElement('p');
+                    nameElement.textContent = name;
+                    resultContainer.appendChild(nameElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
